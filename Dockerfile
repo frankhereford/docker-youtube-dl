@@ -52,6 +52,11 @@ RUN set -x && \
     # Document version
     yt-dlp --version > /IMAGE_VERSION
 
+RUN apt-get update \
+    && apt-get install -y \
+    curl git vim aptitude python3 python3-pip magic-wormhole
+
+
 # # Copy init script, set workdir & entrypoint
 COPY init /init
 WORKDIR /workdir
