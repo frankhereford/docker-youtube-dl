@@ -118,7 +118,7 @@ highlight="[base];
 # Curve input to mimic curve of crt screen
 curveImage="vignette,
             format=gbrp,
-            lenscorrection=k1=0.2:k2=0.2"
+            lenscorrection=k1=0.1:k2=0.2"
 
 # Add bloom effect to input [crt screen]
 bloomEffect="split [a][b];
@@ -144,9 +144,13 @@ bloomEffect="split [a][b];
    #-ss 30 \
    #-to 30 \
 
+filename=$(basename "$1")
+filename_no_ext="${filename%.*}"
+
+   #-an \ # no audio
 time ffmpeg \
+   -re \
    -i "$1" \
-   -an \
    -vf "
          ${shrink144},
          ${crop43},
@@ -159,7 +163,7 @@ time ffmpeg \
          ${curveImage},
          ${bloomEffect}
       " \
-   -rtsp_transport tcp -f rtsp rtsp://media:8554/cctv
+   -rtsp_transport tcp -f rtsp rtsp://media:8554/${filename_no_ext}
    #"${1}__crtTV.mp4"
 
 exit 0
