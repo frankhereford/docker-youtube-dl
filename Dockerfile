@@ -59,5 +59,9 @@ RUN apt-get update \
 
 # # Copy init script, set workdir & entrypoint
 COPY init /init
+COPY youtube-dl.conf /config/youtube-dl.conf
+RUN mkdir /workdir
+RUN chmod a+rw /workdir
+
 WORKDIR /workdir
 ENTRYPOINT ["/init"]
