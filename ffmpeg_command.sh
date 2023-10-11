@@ -16,10 +16,10 @@
 ### FILTERCHAINS #############################################################
 
 # Reduce input to 25% PAL resolution
-shrink144="scale=-2:288"
+shrink144="scale=-2:144"
 
 # Crop to 4:3 aspect ratio at 25% PAL resolution
-crop43="crop=360:288"
+crop43="crop=180:144"
 
 # Create RGB chromatic aberration
 rgbFX="split=3[red][green][blue];
@@ -154,6 +154,7 @@ time ffmpeg \
    -vf "
          ${shrink144},
          ${crop43},
+         ${rgbFX},
          ${noiseFX},
          ${interlaceFX},
          ${scale2PAL}
