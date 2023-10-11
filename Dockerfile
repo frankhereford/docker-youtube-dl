@@ -54,7 +54,7 @@ RUN set -x && \
 
 RUN apt-get update \
     && apt-get install -y \
-    curl git vim aptitude python3 python3-pip magic-wormhole awscli
+    curl git vim aptitude python3 python3-pip magic-wormhole awscli ffmpeg frei0r-plugins
 
 
 # # Copy init script, set workdir & entrypoint
@@ -62,6 +62,8 @@ COPY init /init
 COPY youtube-dl.conf /config/youtube-dl.conf
 RUN mkdir /workdir
 RUN chmod a+rw /workdir
+COPY ffmpeg_command.sh /workdir/ffmpeg_command.sh
+RUN chmod a+x /workdir/ffmpeg_command.sh
 
 WORKDIR /workdir
 ENTRYPOINT ["/init"]
