@@ -141,11 +141,12 @@ bloomEffect="split [a][b];
          #${curveImage},
          #${bloomEffect}
 
+   #-ss 30 \
+   #-to 30 \
 
 time ffmpeg \
-   -ss 30 \
    -i "$1" \
-   -to 30 \
+   -an \
    -vf "
          ${shrink144},
          ${crop43},
@@ -158,6 +159,7 @@ time ffmpeg \
          ${curveImage},
          ${bloomEffect}
       " \
-   "${1}__crtTV.mp4"
+   -rtsp_transport tcp -f rtsp rtsp://media:8554/cctv
+   #"${1}__crtTV.mp4"
 
 exit 0
