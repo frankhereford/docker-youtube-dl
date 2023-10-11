@@ -72,3 +72,6 @@ fi
 
 # Run youtube-dlc with remainder of command line arguments
 setpriv --reuid dockeruser --regid dockeruser --keep-groups python3 /usr/local/bin/yt-dlp --config-location /etc/youtube-dl.conf "$@"
+
+# spin forever
+#tail -f /dev/null
