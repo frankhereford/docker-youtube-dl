@@ -16,10 +16,10 @@
 ### FILTERCHAINS #############################################################
 
 # Reduce input to 25% PAL resolution
-shrink144="scale=-2:144"
+shrink144="scale=-2:288"
 
 # Crop to 4:3 aspect ratio at 25% PAL resolution
-crop43="crop=180:144"
+crop43="crop=360:288"
 
 # Create RGB chromatic aberration
 rgbFX="split=3[red][green][blue];
@@ -163,6 +163,7 @@ time ffmpeg \
          ${curveImage},
          ${bloomEffect}
       " \
+   -b:v 3M \
    -rtsp_transport tcp -f rtsp rtsp://media:8554/${filename_no_ext}
    #"${1}__crtTV.mp4"
 
