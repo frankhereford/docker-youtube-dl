@@ -141,16 +141,15 @@ bloomEffect="split [a][b];
          #${curveImage},
          #${bloomEffect}
 
-   #-ss 30 \
-   #-to 30 \
-
 filename=$(basename "$1")
 filename_no_ext="${filename%.*}"
 
    #-an \ # no audio
-time ffmpeg \
+ffmpeg \
    -re \
    -i "$1" \
+   -strict experimental \
+   -c:v libvpx-vp9 \
    -vf "
          ${shrink144},
          ${crop43},
@@ -166,6 +165,8 @@ time ffmpeg \
       " \
    -b:v 3M \
    -rtsp_transport tcp -f rtsp rtsp://media:8554/${filename_no_ext}
+
+   #-c:v libx265 -c:a aac \
    #"${1}__crtTV.mp4"
 
 exit 0
