@@ -145,15 +145,18 @@ filename=$(basename "$1")
 filename_no_ext="${filename%.*}"
 
    #-an \ # no audio
+   #-strict experimental -c:v libvpx-vp9 \
+
+   #-hwaccel qsv \
+   #-c:v h264_qsv \
+   #-re \
 ffmpeg \
-   -re \
    -i "$1" \
-   -strict experimental \
-   -c:v libvpx-vp9 \
    -vf "
          ${shrink144},
          ${crop43},
          ${rgbFX},
+         ${yuvFX},
          ${noiseFX},
          ${interlaceFX},
          ${scale2PAL}
@@ -164,7 +167,10 @@ ffmpeg \
          ${bloomEffect}
       " \
    -b:v 3M \
-   -rtsp_transport tcp -f rtsp rtsp://media:8554/${filename_no_ext}
+   -c:v libx264 \
+   -rtsp_transport tcp \
+   -f rtsp rtsp://media:8554/${filename_no_ext}
+   #-c:v libx264 \
 
    #-c:v libx265 -c:a aac \
    #"${1}__crtTV.mp4"

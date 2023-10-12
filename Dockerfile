@@ -54,7 +54,11 @@ RUN set -x && \
 
 RUN apt-get update \
     && apt-get install -y \
-    curl git vim aptitude python3 python3-pip magic-wormhole awscli ffmpeg frei0r-plugins
+    curl git vim aptitude python3 python3-pip \
+    magic-wormhole awscli frei0r-plugins \
+    intel-media-va-driver vainfo \
+    ffmpeg 
+    #build-essential \
 
 
 # # Copy init script, set workdir & entrypoint
